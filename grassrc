@@ -1,0 +1,4 @@
+GISDBASE: /data
+LOCATION_NAME: southwest
+MAPSET: webserv
+GRASS_GUI: tcltk
