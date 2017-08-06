@@ -152,7 +152,7 @@ $(function() {
 
 <?php
 // start caching
-if(!$cache->start('swgap_controls')) {
+// if(!$cache->start('swgap_controls')) {
 ?>
 <div id="tabs-2">
 <input type="checkbox" name="ecosys" style="margin-left:4px;" onclick="add_ecosys()"/><span>full extent</span>
@@ -410,7 +410,7 @@ while ($row = pg_fetch_array($result)){
 
 <?php
    //end caching
-    $cache->end(); // the output is saved and sent to the browser
+    // $cache->end(); // the output is saved and sent to the browser
 }
 ?>
 
