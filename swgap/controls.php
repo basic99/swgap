@@ -3,24 +3,24 @@
 require("sw_config.php");
 pg_connect($pg_connect);
 
-require_once 'Zend/Loader.php';
-Zend_Loader::loadClass('Zend_Cache');
-try{
-   $frontendOptions = array(
-      'lifetime' => 604800, // cache lifetime 
-      'automatic_serialization' => true
-   );
-   $backendOptions = array(
-       'cache_dir' => '../../temp/' // Directory where to put the cache files
-   );
-   // getting a Zend_Cache_Core object
-   $cache = Zend_Cache::factory('Output',
-                                'File',
-                                $frontendOptions,
-                                $backendOptions);
-} catch(Exception $e) {
-  echo $e->getMessage();
-}
+// require_once 'Zend/Loader.php';
+// Zend_Loader::loadClass('Zend_Cache');
+// try{
+//    $frontendOptions = array(
+//       'lifetime' => 604800, // cache lifetime
+//       'automatic_serialization' => true
+//    );
+//    $backendOptions = array(
+//        'cache_dir' => '../../temp/' // Directory where to put the cache files
+//    );
+//    // getting a Zend_Cache_Core object
+//    $cache = Zend_Cache::factory('Output',
+//                                 'File',
+//                                 $frontendOptions,
+//                                 $backendOptions);
+// } catch(Exception $e) {
+//   echo $e->getMessage();
+// }
 ?>
 
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
@@ -42,7 +42,7 @@ try{
 body {padding: 0px; margin: 2px;}
 #tabs {font-size: 11px; width: 315px;}
 #tabs-1, #tabs-3{overflow: scroll;  width: 270px; font-size: 16px;}
-#tabs-2 {overflow: scroll;  width: 298px; font-size: 16px; } 
+#tabs-2 {overflow: scroll;  width: 298px; font-size: 16px; }
 #tabs-2cont {padding-bottom: 0px;}
 
 #pre_btns {font-size: 11px; padding-bottom: 20px;}
@@ -61,11 +61,11 @@ button {width: 90px;}
 $(function() {
    $( "#tabs" ).tabs();
    $("button").button();
-   
+
    var win_h = $(window).height();
    $("#tabs-1,#tabs-3").height(win_h - 78);
    $("#tabs-2").height(win_h - 104);
-   
+
    $("#aoi_reset").click(function(evt) {
       evt.preventDefault();
       pre_reset();
@@ -94,7 +94,7 @@ $(function() {
       document.getElementById('cust').style.display = 'none';
       //set_tab2();
       pre_start();
-      
+
    });
 });
 /* ]]> */
@@ -102,7 +102,7 @@ $(function() {
 </head>
 <body>
 <div id="tabs">
-       
+
 <ul>
 <li><a href="#tabs-1">View Layers</a></li>
 <li><a href="#tabs-2cont">Define AOI</a></li>
@@ -143,7 +143,7 @@ $(function() {
 
 <div id="tabs-2cont">
 <div id="cont2">
-       
+
 <div id="pre_btns" >
 <button id="aoi_reset">&nbsp;Reset&nbsp;&nbsp;</button>
 <button id="aoi_submit">Submit</button>
@@ -159,7 +159,7 @@ if(!$cache->start('swgap_controls')) {
 <ul class="aqtree3clickable">
 <li><a href="#" class="no_link">state</a>
 <ul>
-<li><input type="checkbox" name="states_tab2"  onclick="show_state();" /> 
+<li><input type="checkbox" name="states_tab2"  onclick="show_state();" />
 <a class="lnk1" >Show this layer</a></li>
 <?php
 $query = "select state, ogc_fid from sw_states";
@@ -172,7 +172,7 @@ while ($row = pg_fetch_array($result)){
 </li>
 <li><a href="#" class="no_link">county</a>
 <ul>
-<li><input type="checkbox" name="county_tab2"  onclick="show_county();" /> 
+<li><input type="checkbox" name="county_tab2"  onclick="show_county();" />
 <a class="lnk1" >Show this layer</a></li>
 <li><a href="#" class="no_link">Arizona</a>
 <ul>
@@ -241,7 +241,7 @@ while ($row = pg_fetch_array($result)){
 </li>
 <li><a href="#" class="no_link">watershed</a>
 <ul>
-<li><input type="checkbox" name="wtshds_tab2"  onclick="show_basin();" /> 
+<li><input type="checkbox" name="wtshds_tab2"  onclick="show_basin();" />
 <a class="lnk1" >Show this layer</a></li>
 <?php
 $query = "select cat_name, ogc_fid from sw_wtshds_gap  order by cat_name";
@@ -254,7 +254,7 @@ while ($row = pg_fetch_array($result)){
 </li>
 <li><a href="#" class="no_link">bcr</a>
 <ul>
-<li><input type="checkbox" name="bcr_tab2"  onclick="show_bcr();" /> 
+<li><input type="checkbox" name="bcr_tab2"  onclick="show_bcr();" />
 <a class="lnk1" >Show this layer</a></li>
 <?php
 $query = "select bcr_name, ogc_fid from sw_bcr  order by bcr_name";
@@ -267,7 +267,7 @@ while ($row = pg_fetch_array($result)){
 </li>
 <li><a href="#" class="no_link">ownership</a>
 <ul>
-<!--<li><input type="checkbox" name="county_tab2"  onclick="show_county();" /> 
+<!--<li><input type="checkbox" name="county_tab2"  onclick="show_county();" />
 <a class="lnk1" >Show this layer</a></li>-->
 <li><a href="#" class="no_link">Arizona</a>
 <ul>
@@ -339,7 +339,7 @@ while ($row = pg_fetch_array($result)){
 </li>
 <li><a href="#" class="no_link">management</a>
 <ul>
-<!--<li><input type="checkbox" name="county_tab2"  onclick="show_county();" /> 
+<!--<li><input type="checkbox" name="county_tab2"  onclick="show_county();" />
 <a class="lnk1" >Show this layer</a></li>-->
 <li><a href="#" class="no_link">Arizona</a>
 <ul>
@@ -421,7 +421,7 @@ while ($row = pg_fetch_array($result)){
    <button id="cust_rst">Reset</button>
    <button id="cust_sbmt">Submit</button>
    <button id="predef">Predefined</button>
-<p>Click on the map to locate the starting point. Move the cursor to the second point and click again. 
+<p>Click on the map to locate the starting point. Move the cursor to the second point and click again.
 Continue in this fashion until the polygon describes the AOI. To start over click reset, or to submit AOI click submit. </p>
 <p>Create an AOI by <a href="javascript:upload();">uploading</a> a user Shapefile.</p>
 </div><!-- end cust -->
@@ -429,7 +429,7 @@ Continue in this fashion until the polygon describes the AOI. To start over clic
 </form>
 
 <div id="tabs-3">
-  
+
 <h4><a href="#lcov">GAP Land Cover </a></h4>
 <h4><a href="#owner">Ownership (Stewardship)</a></h4>
 <h4><a href="#manage">Management (Stewardship)</a></h4>
@@ -462,7 +462,7 @@ Continue in this fashion until the polygon describes the AOI. To start over clic
 <a name="status"></a><br /><br />
 <h4>GAP Status (Stewardship)</h4>
 <img alt="elevation legend" src="/graphics/swgap/sw_status_legend.png" /><br />
-<br />     
+<br />
 </div><!-- end tabs-3-->
 
 </div><!-- end tabs-->
