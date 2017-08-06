@@ -4,8 +4,9 @@ session_start();
 require('sw_config.php');
 pg_connect($pg_connect);
 
-$mapfile = "../swgap.map";
-
+$mapfile = "/var/www/html/swgap/swgap.map";
+ini_set("display_errors", 0);
+ini_set("error_log", "/var/www/html/swgap/logs/php-error.log");
 
 //process ajax input data
 $extent_raw = $_POST['extent'];

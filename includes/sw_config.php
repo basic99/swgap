@@ -21,4 +21,6 @@ $large_aoi_area = 100000000000;
 $pg_connect = "host=localhost dbname=swgap user=postgres";
 
 $mspath = "/pub/server_temp/";
+
+ini_set("log_errors", 1);
 ?>
