@@ -411,7 +411,7 @@ while ($row = pg_fetch_array($result)){
 <?php
    //end caching
     // $cache->end(); // the output is saved and sent to the browser
-}
+// }
 ?>
 
 </div><!-- end cont2-->
