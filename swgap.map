@@ -7,21 +7,21 @@ MAP
   FONTSET '/var/www/html/ncgap/myfonts.txt'
   #FONTSET '/var/www/html/ncgap/fontset.txt'
   CONFIG PROJ_LIB "/usr/local/share/proj/"
-  
+
   WEB
 	IMAGEPATH   '/data/server_temp/'
 	IMAGEURL  '/server_temp/'
 	LOG /var/www/html/temp/error.log
   END
-  
-  
+
+
   OUTPUTFORMAT
     NAME 'AGGA'
     DRIVER AGG/PNG
     IMAGEMODE RGB
     FORMATOPTION "INTERLACE=OFF"
   END
-  
+
   OUTPUTFORMAT
     NAME mypng
     DRIVER "GD/PNG"
@@ -30,7 +30,7 @@ MAP
     EXTENSION "png"
     TRANSPARENT ON
   END
-  
+
   OUTPUTFORMAT
     NAME pdfpng
     DRIVER "GD/PNG"
@@ -39,7 +39,7 @@ MAP
     EXTENSION "png"
     FORMATOPTION "INTERLACE=OFF"
   END
-  
+
   LEGEND
     STATUS ON
     KEYSIZE 40 20
@@ -50,9 +50,9 @@ MAP
       SIZE medium
     END
   END
-  
+
   SCALEBAR
-    IMAGECOLOR 255 255 255 
+    IMAGECOLOR 255 255 255
     LABEL
       TYPE truetype
       FONT  "Sans"
@@ -68,7 +68,7 @@ MAP
     TRANSPARENT FALSE
     STATUS EMBED
   END
-   
+
   PROJECTION
     "proj=aea"
     "lat_0=23.0000000000"
@@ -82,19 +82,28 @@ MAP
     "no_defs"
    "towgs84=0.000,0.000,0.000"
   END
-   
+
   REFERENCE
     IMAGE   '/var/www/html/data/swgap/sw_ref.png'
     SIZE  150 123
     EXTENT -2070000 985000 -474000 2368086.720
-    STATUS ON 
+    STATUS ON
     COLOR -1 -1 -1
   END
   SYMBOL
     NAME 'hatch-lines'
     TYPE HATCH
-  END 
-      
+  END
+
+     SYMBOL
+      NAME "hatch-custom"
+      TYPE vector
+      POINTS
+      1 0
+      0 1
+      END
+    END
+
   SYMBOL
     NAME 'hatch-pattern'
     TYPE  vector
@@ -104,7 +113,7 @@ MAP
       6 6
       5 6
       5 5
-      -1 -1 
+      -1 -1
       15 15
       16 15
       16 16
@@ -114,7 +123,7 @@ MAP
   END
   #################################################################################################################
   ### layer definitions
-  #### background raster 
+  #### background raster
   LAYER
     NAME    landcover
     DATA    "/var/www/html/data/swgap/sw_lcover.gtiff"
@@ -124,7 +133,7 @@ MAP
     TYPE     raster
     TEMPLATE "dummy.html"
   END
-  
+
   LAYER
     NAME    elevation
     DATA    "/var/www/html/data/swgap/SW_Hillshade.gtiff"
@@ -132,14 +141,14 @@ MAP
     STATUS   off
     TYPE     raster
   END
-  
+
   LAYER
     NAME    mapcalc
     DATA    ""
     STATUS   off
     TYPE     raster
   END
-  
+
     #########################################################################################################
   ## watershed range maps
   LAYER
@@ -150,94 +159,94 @@ MAP
     STATUS off
     TYPE POLYGON
     CLASSITEM ""
-    
+
     CLASS
       NAME "known, wintering"
-      EXPRESSION /17|22/	         
+      EXPRESSION /17|22/
 	  	STYLE
-        OUTLINECOLOR 120 120 120 
+        OUTLINECOLOR 120 120 120
         COLOR 0 0 255
       END
     END
      CLASS
       NAME "known, summering"
-      EXPRESSION /18|23/	         
+      EXPRESSION /18|23/
 	  	STYLE
-        OUTLINECOLOR 120 120 120 
+        OUTLINECOLOR 120 120 120
         COLOR 255 162 0
       END
     END
      CLASS
       NAME "known, year round"
-      EXPRESSION /19|24|29/	         
+      EXPRESSION /19|24|29/
 	  	STYLE
-        OUTLINECOLOR 120 120 120 
+        OUTLINECOLOR 120 120 120
         COLOR 208 0 255
       END
     END
      CLASS
       NAME "known, migratory"
-      EXPRESSION /21/	         
+      EXPRESSION /21/
 	  	STYLE
-        OUTLINECOLOR 120 120 120 
+        OUTLINECOLOR 120 120 120
         COLOR 255 255 0
       END
     END
     CLASS
       NAME "potential, wintering"
-      EXPRESSION /42/	         
+      EXPRESSION /42/
 	  	STYLE
-        OUTLINECOLOR 120 120 120 
+        OUTLINECOLOR 120 120 120
         COLOR 155 155 255
       END
     END
      CLASS
       NAME "potential, summering"
-      EXPRESSION /38/	         
+      EXPRESSION /38/
 	  	STYLE
-        OUTLINECOLOR 120 120 120 
+        OUTLINECOLOR 120 120 120
         COLOR 255 218 155
       END
     END
      CLASS
       NAME "potential, year round"
-      EXPRESSION /49/	         
+      EXPRESSION /49/
 	  	STYLE
-        OUTLINECOLOR 120 120 120 
+        OUTLINECOLOR 120 120 120
         COLOR 237 155 255
       END
     END
      CLASS
       NAME "potential, migratory"
-      EXPRESSION /41/	         
+      EXPRESSION /41/
 	  	STYLE
-        OUTLINECOLOR 120 120 120 
+        OUTLINECOLOR 120 120 120
         COLOR 255 255 205
       END
     END
     CLASS
       NAME "extirpated"
-      EXPRESSION 	/6[0-9]/  	         
+      EXPRESSION 	/6[0-9]/
 	  STYLE
-        #OUTLINECOLOR 120 120 120 
+        #OUTLINECOLOR 120 120 120
         #COLOR 0 0 255
         SYMBOL 'hatch-lines'
-	  	COLOR 120 120 120       
+	  	COLOR 120 120 120
         SIZE 10
         OUTLINECOLOR 120 120 120
       END
     END
     CLASS
       NAME "absent"
-      ##EXPRESSION NULL  	         
+      ##EXPRESSION NULL
 	  	STYLE
         OUTLINECOLOR 120 120 120
       END
     END
   END
-  
+
   ###########################################################################################################
-  ###manage layers  query  
+  ###manage layers  query
   LAYER
     CONNECTIONTYPE postgis
     NAME "manage_q"
@@ -246,9 +255,9 @@ MAP
     STATUS off
     TYPE POLYGON
     CLASS
-      STYLE        
+      STYLE
         SYMBOL 'hatch-lines'
-	  	COLOR 120 120 120       
+	  	COLOR 120 120 120
         SIZE 10
         OUTLINECOLOR 120 120 120
       END
@@ -282,7 +291,7 @@ MAP
     TYPE POLYGON
     CLASS
       STYLE
-        OUTLINECOLOR 50 100 150 
+        OUTLINECOLOR 50 100 150
         WIDTH 1
       END
     END
@@ -296,7 +305,7 @@ MAP
     STATUS off
     TYPE LINE
     LABELITEM 'name'
-    CLASS 
+    CLASS
       LABEL
         TYPE truetype
         FONT  "Sans"
@@ -310,10 +319,10 @@ MAP
       END
       STYLE
         WIDTH 1
-        COLOR 255 0 0 
+        COLOR 255 0 0
       END
     END
-  END 
+  END
   LAYER
     CONNECTIONTYPE postgis
     NAME "rivers"
@@ -322,7 +331,7 @@ MAP
     STATUS off
     TYPE LINE
     LABELITEM 'nameen'
-    CLASS 
+    CLASS
       LABEL
         TYPE truetype
         FONT  "Sans"
@@ -339,7 +348,7 @@ MAP
         COLOR 0 0 255
       END
     END
-  END 
+  END
   LAYER
     CONNECTIONTYPE postgis
     NAME "counties"
@@ -395,302 +404,302 @@ MAP
     TYPE POLYGON
     CLASSITEM "own_c"
     TRANSPARENCY alpha
-    CLASS   
-      NAME "Bureau of Land Management (BLM)" 
-      EXPRESSION "1100"             
+    CLASS
+      NAME "Bureau of Land Management (BLM)"
+      EXPRESSION "1100"
       STYLE
         OUTLINECOLOR 254 230 121
         WIDTH 1
       END
       STYLE
-        SYMBOL 'hatch-lines'
-        COLOR 254 230 121   
-        ANGLE 60
+        SYMBOL 'hatch-custom'
+        COLOR 254 230 121
+
         SIZE 10
         WIDTH 1
       END
     END
-    CLASS   
-      NAME "Bureau of Reclamation (BOR)" 
-      EXPRESSION "1200"             
+    CLASS
+      NAME "Bureau of Reclamation (BOR)"
+      EXPRESSION "1200"
       STYLE
         OUTLINECOLOR 255 255 179
         WIDTH 1
       END
       STYLE
-        SYMBOL 'hatch-lines'
-        COLOR 255 255 179  
-        ANGLE 60
+        SYMBOL 'hatch-custom'
+        COLOR 255 255 179
+
         SIZE 10
         WIDTH 1
       END
     END
-    CLASS   
-      NAME "Fish & Wildlife Service (FWS)" 
-      EXPRESSION "1300"             
+    CLASS
+      NAME "Fish & Wildlife Service (FWS)"
+      EXPRESSION "1300"
       STYLE
         OUTLINECOLOR 127 204 167
         WIDTH 1
       END
       STYLE
-        SYMBOL 'hatch-lines'
-        COLOR 127 204 167  
-        ANGLE 60
+        SYMBOL 'hatch-custom'
+        COLOR 127 204 167
+
         SIZE 10
         WIDTH 1
       END
     END
-    CLASS   
-      NAME "Forest Service (USFS)" 
-      EXPRESSION "1400"             
+    CLASS
+      NAME "Forest Service (USFS)"
+      EXPRESSION "1400"
       STYLE
         OUTLINECOLOR 204 235 197
         WIDTH 1
       END
       STYLE
-        SYMBOL 'hatch-lines'
-        COLOR 204 235 197 
-        ANGLE 60
+        SYMBOL 'hatch-custom'
+        COLOR 204 235 197
+
         SIZE 10
         WIDTH 1
       END
     END
-    CLASS   
-      NAME "Department of Defense (DOD) & Department of Energy (DOE)" 
-      EXPRESSION "1500"             
+    CLASS
+      NAME "Department of Defense (DOD) & Department of Energy (DOE)"
+      EXPRESSION "1500"
       STYLE
         OUTLINECOLOR 251 180 206
         WIDTH 1
       END
       STYLE
-        SYMBOL 'hatch-lines'
-        COLOR 251 180 206  
-        ANGLE 60
+        SYMBOL 'hatch-custom'
+        COLOR 251 180 206
+
         SIZE 10
         WIDTH 1
       END
     END
-    CLASS   
-      NAME "National Park Service (NPS)" 
-      EXPRESSION "1600"             
+    CLASS
+      NAME "National Park Service (NPS)"
+      EXPRESSION "1600"
       STYLE
         OUTLINECOLOR 202 189 220
         WIDTH 1
       END
       STYLE
-        SYMBOL 'hatch-lines'
-        COLOR   202 189 220 
-        ANGLE 60
+        SYMBOL 'hatch-custom'
+        COLOR   202 189 220
+
         SIZE 10
         WIDTH 1
       END
     END
-    CLASS   
-      NAME "Agricultural Research Service (ARS)" 
-      EXPRESSION "1750"             
+    CLASS
+      NAME "Agricultural Research Service (ARS)"
+      EXPRESSION "1750"
       STYLE
         OUTLINECOLOR 228 196 159
         WIDTH 1
       END
       STYLE
-        SYMBOL 'hatch-lines'
-        COLOR   228 196 159  
-        ANGLE 60
+        SYMBOL 'hatch-custom'
+        COLOR   228 196 159
+
         SIZE 10
         WIDTH 1
       END
     END
-    CLASS   
-      NAME "Department of Commerce (DOC)" 
-      EXPRESSION "1950"             
+    CLASS
+      NAME "Department of Commerce (DOC)"
+      EXPRESSION "1950"
       STYLE
         OUTLINECOLOR 228 196 159
         WIDTH 1
       END
       STYLE
-        SYMBOL 'hatch-lines'
-        COLOR  228 196 159    
-        ANGLE 60
+        SYMBOL 'hatch-custom'
+        COLOR  228 196 159
+
         SIZE 10
         WIDTH 1
       END
     END
-    CLASS   
-      NAME "Native American Land" 
-      EXPRESSION "2200"             
+    CLASS
+      NAME "Native American Land"
+      EXPRESSION "2200"
       STYLE
         OUTLINECOLOR 253 180 108
         WIDTH 1
       END
       STYLE
-        SYMBOL 'hatch-lines'
-        COLOR   253 180 108   
-        ANGLE 60
+        SYMBOL 'hatch-custom'
+        COLOR   253 180 108
+
         SIZE 10
         WIDTH 1
       END
     END
-    CLASS   
-      NAME "State Parks & Recreation" 
-      EXPRESSION "3100"             
+    CLASS
+      NAME "State Parks & Recreation"
+      EXPRESSION "3100"
       STYLE
         OUTLINECOLOR 143 181 190
         WIDTH 1
       END
       STYLE
-        SYMBOL 'hatch-lines'
-        COLOR 143 181 190   
-        ANGLE 60
+        SYMBOL 'hatch-custom'
+        COLOR 143 181 190
+
         SIZE 10
         WIDTH 1
       END
     END
-    CLASS   
-      NAME "State Land Board" 
-      EXPRESSION "3200"             
+    CLASS
+      NAME "State Land Board"
+      EXPRESSION "3200"
       STYLE
         OUTLINECOLOR 179 227 238
         WIDTH 1
       END
       STYLE
-        SYMBOL 'hatch-lines'
-        COLOR    179 227 238  
-        ANGLE 60
+        SYMBOL 'hatch-custom'
+        COLOR    179 227 238
+
         SIZE 10
         WIDTH 1
       END
     END
-    CLASS   
-      NAME "State Wildlife Reserves" 
-      EXPRESSION "3300"             
+    CLASS
+      NAME "State Wildlife Reserves"
+      EXPRESSION "3300"
       STYLE
         OUTLINECOLOR 107 207 226
         WIDTH 1
       END
       STYLE
-        SYMBOL 'hatch-lines'
-        COLOR  107 207 226    
-        ANGLE 60
+        SYMBOL 'hatch-custom'
+        COLOR  107 207 226
+
         SIZE 10
         WIDTH 1
       END
     END
-    CLASS   
-      NAME "Other State Land" 
-      EXPRESSION "3400"             
+    CLASS
+      NAME "Other State Land"
+      EXPRESSION "3400"
       STYLE
         OUTLINECOLOR 179 227 238
         WIDTH 1
       END
       STYLE
-        SYMBOL 'hatch-lines'
-        COLOR 179 227 238     
-        ANGLE 60
+        SYMBOL 'hatch-custom'
+        COLOR 179 227 238
+
         SIZE 10
         WIDTH 1
       END
     END
-    CLASS   
-      NAME "Regional Government Land" 
-      EXPRESSION "4100"             
+    CLASS
+      NAME "Regional Government Land"
+      EXPRESSION "4100"
       STYLE
         OUTLINECOLOR 143 181 190
         WIDTH 1
       END
       STYLE
-        SYMBOL 'hatch-lines'
-        COLOR   143 181 190   
-        ANGLE 60
+        SYMBOL 'hatch-custom'
+        COLOR   143 181 190
+
         SIZE 10
         WIDTH 1
       END
     END
-    CLASS   
-      NAME "City Land" 
-      EXPRESSION "5100"             
+    CLASS
+      NAME "City Land"
+      EXPRESSION "5100"
       STYLE
         OUTLINECOLOR 143 181 190
         WIDTH 1
       END
       STYLE
-        SYMBOL 'hatch-lines'
-        COLOR   143 181 190   
-        ANGLE 60
+        SYMBOL 'hatch-custom'
+        COLOR   143 181 190
+
         SIZE 10
         WIDTH 1
       END
     END
-    CLASS   
-      NAME "County Land" 
-      EXPRESSION "5200"             
+    CLASS
+      NAME "County Land"
+      EXPRESSION "5200"
       STYLE
         OUTLINECOLOR 143 181 190
         WIDTH 1
       END
       STYLE
-        SYMBOL 'hatch-lines'
-        COLOR   143 181 190   
-        ANGLE 60
+        SYMBOL 'hatch-custom'
+        COLOR   143 181 190
+
         SIZE 10
         WIDTH 1
       END
     END
-    CLASS   
-      NAME "Audubon Society" 
-      EXPRESSION "6100"             
+    CLASS
+      NAME "Audubon Society"
+      EXPRESSION "6100"
       STYLE
         OUTLINECOLOR 0 0 0
         WIDTH 1
       END
       STYLE
-        SYMBOL 'hatch-lines'
-        COLOR 0 0 0     
-        ANGLE 60
+        SYMBOL 'hatch-custom'
+        COLOR 0 0 0
+
         SIZE 10
         WIDTH 1
       END
     END
-    CLASS   
-      NAME "Local Land Trust Preserve/ Easement" 
-      EXPRESSION "6200"             
+    CLASS
+      NAME "Local Land Trust Preserve/ Easement"
+      EXPRESSION "6200"
       STYLE
         OUTLINECOLOR 0 0 0
         WIDTH 1
       END
       STYLE
-        SYMBOL 'hatch-lines'
-        COLOR 0 0 0    
-        ANGLE 60
+        SYMBOL 'hatch-custom'
+        COLOR 0 0 0
+
         SIZE 10
         WIDTH 1
       END
     END
-    CLASS   
-      NAME "The Nature Conservancy" 
-      EXPRESSION "6300"             
+    CLASS
+      NAME "The Nature Conservancy"
+      EXPRESSION "6300"
       STYLE
         OUTLINECOLOR 0 0 0
         WIDTH 1
       END
       STYLE
-        SYMBOL 'hatch-lines'
-        COLOR 0 0 0      
-        ANGLE 60
+        SYMBOL 'hatch-custom'
+        COLOR 0 0 0
+
         SIZE 10
         WIDTH 1
       END
     END
-    CLASS   
-      NAME "Private Institution Managed for Biodiversity" 
-      EXPRESSION "7200"             
+    CLASS
+      NAME "Private Institution Managed for Biodiversity"
+      EXPRESSION "7200"
       STYLE
         OUTLINECOLOR 0 0 0
         WIDTH 1
       END
       STYLE
-        SYMBOL 'hatch-lines'
-        COLOR 0 0 0    
-        ANGLE 60
+        SYMBOL 'hatch-custom'
+        COLOR 0 0 0
+
         SIZE 10
         WIDTH 1
       END
@@ -707,39 +716,39 @@ MAP
     TYPE POLYGON
     CLASSITEM "man_c_cond"
     TRANSPARENCY alpha
-    CLASS   
-      NAME "Bureau of Land Management,  Other Special Management Areas" 
-      EXPRESSION "1100"             
+    CLASS
+      NAME "Bureau of Land Management,  Other Special Management Areas"
+      EXPRESSION "1100"
       STYLE
         OUTLINECOLOR 254 230 121
         WIDTH 1
       END
       STYLE
         SYMBOL 'hatch-lines'
-        COLOR 254 230 121 
+        COLOR 254 230 121
         ANGLE 60
         SIZE 10
         WIDTH 1
       END
     END
-    CLASS   
-      NAME "Bureau of Land Management, Public Land" 
-      EXPRESSION "1190"             
+    CLASS
+      NAME "Bureau of Land Management, Public Land"
+      EXPRESSION "1190"
       STYLE
         OUTLINECOLOR 254 230 121
         WIDTH 1
       END
       STYLE
         SYMBOL 'hatch-lines'
-        COLOR 254 230 121 
+        COLOR 254 230 121
         ANGLE 60
         SIZE 10
         WIDTH 1
       END
     END
-    CLASS   
-      NAME "Bureau of Land Management Wilderness Area" 
-      EXPRESSION "1192"             
+    CLASS
+      NAME "Bureau of Land Management Wilderness Area"
+      EXPRESSION "1192"
       STYLE
         OUTLINECOLOR 254 204 92
         WIDTH 1
@@ -752,9 +761,9 @@ MAP
         WIDTH 1
       END
     END
-    CLASS   
-      NAME "Bureau of Reclamation" 
-      EXPRESSION "1200"             
+    CLASS
+      NAME "Bureau of Reclamation"
+      EXPRESSION "1200"
       STYLE
         OUTLINECOLOR 255 255 179
         WIDTH 1
@@ -767,9 +776,9 @@ MAP
         WIDTH 1
       END
     END
-    CLASS   
-      NAME "Fish and Wildlife Service, Other Special Management Areas" 
-      EXPRESSION "1300"             
+    CLASS
+      NAME "Fish and Wildlife Service, Other Special Management Areas"
+      EXPRESSION "1300"
       STYLE
         OUTLINECOLOR 127 204 167
         WIDTH 1
@@ -782,9 +791,9 @@ MAP
         WIDTH 1
       END
     END
-    CLASS   
-      NAME "Fish and Wildlife Service National Wildlife Refuge" 
-      EXPRESSION "1301"             
+    CLASS
+      NAME "Fish and Wildlife Service National Wildlife Refuge"
+      EXPRESSION "1301"
       STYLE
         OUTLINECOLOR 127 204 167
         WIDTH 1
@@ -797,9 +806,9 @@ MAP
         WIDTH 1
       END
     END
-    CLASS   
-      NAME "Fish and Wildlife Service Wilderness Area" 
-      EXPRESSION "1303"             
+    CLASS
+      NAME "Fish and Wildlife Service Wilderness Area"
+      EXPRESSION "1303"
       STYLE
         OUTLINECOLOR 102 191 127
         WIDTH 1
@@ -812,9 +821,9 @@ MAP
         WIDTH 1
       END
     END
-    CLASS   
-      NAME "Forest Service, Other Special Management Areas" 
-      EXPRESSION "1400"             
+    CLASS
+      NAME "Forest Service, Other Special Management Areas"
+      EXPRESSION "1400"
       STYLE
         OUTLINECOLOR 204 235 197
         WIDTH 1
@@ -827,9 +836,9 @@ MAP
         WIDTH 1
       END
     END
-    CLASS   
-      NAME "Forest Service Wilderness Area" 
-      EXPRESSION "1412"             
+    CLASS
+      NAME "Forest Service Wilderness Area"
+      EXPRESSION "1412"
       STYLE
         OUTLINECOLOR 153 213 148
         WIDTH 1
@@ -842,9 +851,9 @@ MAP
         WIDTH 1
       END
     END
-    CLASS   
-      NAME "Forest Service, Public Land" 
-      EXPRESSION "1490"             
+    CLASS
+      NAME "Forest Service, Public Land"
+      EXPRESSION "1490"
       STYLE
         OUTLINECOLOR 204 235 197
         WIDTH 1
@@ -857,24 +866,24 @@ MAP
         WIDTH 1
       END
     END
-    CLASS   
-      NAME "Forest Service, National Grassland" 
-      EXPRESSION "1496"             
+    CLASS
+      NAME "Forest Service, National Grassland"
+      EXPRESSION "1496"
       STYLE
         OUTLINECOLOR 230 245 177
         WIDTH 1
       END
       STYLE
         SYMBOL 'hatch-lines'
-        COLOR  230 245 177 
+        COLOR  230 245 177
         ANGLE 60
         SIZE 10
         WIDTH 1
       END
     END
-    CLASS   
-      NAME "DOD, Ecological Reserves, Special Resources Areas/Research Natural Areas" 
-      EXPRESSION "1500"             
+    CLASS
+      NAME "DOD, Ecological Reserves, Special Resources Areas/Research Natural Areas"
+      EXPRESSION "1500"
       STYLE
         OUTLINECOLOR 251 180 206
         WIDTH 1
@@ -887,9 +896,9 @@ MAP
         WIDTH 1
       END
     END
-    CLASS   
-      NAME "Army Corps of Engineers" 
-      EXPRESSION "1550"             
+    CLASS
+      NAME "Army Corps of Engineers"
+      EXPRESSION "1550"
       STYLE
         OUTLINECOLOR 251 180 206
         WIDTH 1
@@ -902,9 +911,9 @@ MAP
         WIDTH 1
       END
     END
-    CLASS   
-      NAME "Department of Energy (DOE)" 
-      EXPRESSION "1560"             
+    CLASS
+      NAME "Department of Energy (DOE)"
+      EXPRESSION "1560"
       STYLE
         OUTLINECOLOR 251 180 206
         WIDTH 1
@@ -917,9 +926,9 @@ MAP
         WIDTH 1
       END
     END
-    CLASS   
-      NAME "Military Reservation (DOD)" 
-      EXPRESSION "1590"             
+    CLASS
+      NAME "Military Reservation (DOD)"
+      EXPRESSION "1590"
       STYLE
         OUTLINECOLOR 251 180 206
         WIDTH 1
@@ -932,9 +941,9 @@ MAP
         WIDTH 1
       END
     END
-    CLASS   
-      NAME "National Park Service" 
-      EXPRESSION "1600"             
+    CLASS
+      NAME "National Park Service"
+      EXPRESSION "1600"
       STYLE
         OUTLINECOLOR 202 189 220
         WIDTH 1
@@ -947,9 +956,9 @@ MAP
         WIDTH 1
       END
     END
-    CLASS   
-      NAME "National Park Service Wilderness Area" 
-      EXPRESSION "1617"             
+    CLASS
+      NAME "National Park Service Wilderness Area"
+      EXPRESSION "1617"
       STYLE
         OUTLINECOLOR 177 137 193
         WIDTH 1
@@ -962,24 +971,9 @@ MAP
         WIDTH 1
       END
     END
-    CLASS   
-      NAME "Agricultural Research Service Experimental Range" 
-      EXPRESSION "1751"             
-      STYLE
-        OUTLINECOLOR 228 196 159
-        WIDTH 1
-      END
-      STYLE
-        SYMBOL 'hatch-lines'
-        COLOR   228 196 159 
-        ANGLE 60
-        SIZE 10
-        WIDTH 1
-      END
-    END
-    CLASS   
-      NAME "National Telecommunications and Information Administration" 
-      EXPRESSION "1951"             
+    CLASS
+      NAME "Agricultural Research Service Experimental Range"
+      EXPRESSION "1751"
       STYLE
         OUTLINECOLOR 228 196 159
         WIDTH 1
@@ -992,9 +986,24 @@ MAP
         WIDTH 1
       END
     END
-    CLASS   
-      NAME "Tribal Land" 
-      EXPRESSION "2200"             
+    CLASS
+      NAME "National Telecommunications and Information Administration"
+      EXPRESSION "1951"
+      STYLE
+        OUTLINECOLOR 228 196 159
+        WIDTH 1
+      END
+      STYLE
+        SYMBOL 'hatch-lines'
+        COLOR   228 196 159
+        ANGLE 60
+        SIZE 10
+        WIDTH 1
+      END
+    END
+    CLASS
+      NAME "Tribal Land"
+      EXPRESSION "2200"
       STYLE
         OUTLINECOLOR 253 180 108
         WIDTH 1
@@ -1007,39 +1016,9 @@ MAP
         WIDTH 1
       END
     END
-    CLASS   
-      NAME "State Park and Recreation Areas" 
-      EXPRESSION "3100"             
-      STYLE
-        OUTLINECOLOR 143 181 190
-        WIDTH 1
-      END
-      STYLE
-        SYMBOL 'hatch-lines'
-        COLOR  143 181 190 
-        ANGLE 60
-        SIZE 10
-        WIDTH 1
-      END
-    END
-    CLASS   
-      NAME "State Land Board" 
-      EXPRESSION "3200"             
-      STYLE
-        OUTLINECOLOR 179 227 238
-        WIDTH 1
-      END
-      STYLE
-        SYMBOL 'hatch-lines'
-        COLOR  179 227 238 
-        ANGLE 60
-        SIZE 10
-        WIDTH 1
-      END
-    END
-    CLASS   
-      NAME "State Wildlife Reserve" 
-      EXPRESSION "3300"             
+    CLASS
+      NAME "State Park and Recreation Areas"
+      EXPRESSION "3100"
       STYLE
         OUTLINECOLOR 143 181 190
         WIDTH 1
@@ -1052,39 +1031,69 @@ MAP
         WIDTH 1
       END
     END
-    CLASS   
-      NAME "Other State Land" 
-      EXPRESSION "3400"             
+    CLASS
+      NAME "State Land Board"
+      EXPRESSION "3200"
       STYLE
         OUTLINECOLOR 179 227 238
         WIDTH 1
       END
       STYLE
         SYMBOL 'hatch-lines'
-        COLOR  179 227 238 
+        COLOR  179 227 238
         ANGLE 60
         SIZE 10
         WIDTH 1
       END
     END
-    CLASS   
-      NAME "Regional or Local Government Land" 
-      EXPRESSION "5000"             
+    CLASS
+      NAME "State Wildlife Reserve"
+      EXPRESSION "3300"
       STYLE
         OUTLINECOLOR 143 181 190
         WIDTH 1
       END
       STYLE
         SYMBOL 'hatch-lines'
-        COLOR  143 181 190  
+        COLOR  143 181 190
         ANGLE 60
         SIZE 10
         WIDTH 1
       END
     END
-    CLASS   
-      NAME "Audubon Society Preserve" 
-      EXPRESSION "6101"             
+    CLASS
+      NAME "Other State Land"
+      EXPRESSION "3400"
+      STYLE
+        OUTLINECOLOR 179 227 238
+        WIDTH 1
+      END
+      STYLE
+        SYMBOL 'hatch-lines'
+        COLOR  179 227 238
+        ANGLE 60
+        SIZE 10
+        WIDTH 1
+      END
+    END
+    CLASS
+      NAME "Regional or Local Government Land"
+      EXPRESSION "5000"
+      STYLE
+        OUTLINECOLOR 143 181 190
+        WIDTH 1
+      END
+      STYLE
+        SYMBOL 'hatch-lines'
+        COLOR  143 181 190
+        ANGLE 60
+        SIZE 10
+        WIDTH 1
+      END
+    END
+    CLASS
+      NAME "Audubon Society Preserve"
+      EXPRESSION "6101"
       STYLE
         OUTLINECOLOR 0 0 0
         WIDTH 1
@@ -1097,24 +1106,24 @@ MAP
         WIDTH 1
       END
     END
-    CLASS   
-      NAME "Local Land Trust Preserve/Easement" 
-      EXPRESSION "6201"             
+    CLASS
+      NAME "Local Land Trust Preserve/Easement"
+      EXPRESSION "6201"
       STYLE
         OUTLINECOLOR  0 0 0
         WIDTH 1
       END
       STYLE
         SYMBOL 'hatch-lines'
-        COLOR  0 0 0 
+        COLOR  0 0 0
         ANGLE 60
         SIZE 10
         WIDTH 1
       END
     END
-    CLASS   
-      NAME "The Nature Conservancy Easement/Preserve/Coop Managed Property" 
-      EXPRESSION "6300"             
+    CLASS
+      NAME "The Nature Conservancy Easement/Preserve/Coop Managed Property"
+      EXPRESSION "6300"
       STYLE
         OUTLINECOLOR 0 0 0
         WIDTH 1
@@ -1127,9 +1136,9 @@ MAP
         WIDTH 1
       END
     END
-    CLASS   
-      NAME "Private Institution, Managed for Biodiversity" 
-      EXPRESSION "7201"             
+    CLASS
+      NAME "Private Institution, Managed for Biodiversity"
+      EXPRESSION "7201"
       STYLE
         OUTLINECOLOR 0 0 0
         WIDTH 1
@@ -1155,8 +1164,8 @@ MAP
     CLASSITEM "stat_c"
     TRANSPARENCY alpha
     CLASS
-      NAME "1-Permanent (encouraged natural processes)" 
-      EXPRESSION "1" 	  	         
+      NAME "1-Permanent (encouraged natural processes)"
+      EXPRESSION "1"
 	  	STYLE
         OUTLINECOLOR 3 38 92
         WIDTH 1
@@ -1170,8 +1179,8 @@ MAP
       END
     END
     CLASS
-      NAME "2-Permanent (suppressed natural processes)" 
-      EXPRESSION "2" 	  	         
+      NAME "2-Permanent (suppressed natural processes)"
+      EXPRESSION "2"
 	  	STYLE
         OUTLINECOLOR 47 92 149
         WIDTH 1
@@ -1185,15 +1194,15 @@ MAP
       END
     END
     CLASS
-      NAME "3-Permanent (intensive anthropogenic disturbance)" 
-      EXPRESSION "3" 	  	         
+      NAME "3-Permanent (intensive anthropogenic disturbance)"
+      EXPRESSION "3"
 	  	STYLE
         OUTLINECOLOR 60 131 237
         WIDTH 1
       END
       STYLE
 	  	  SYMBOL 'hatch-lines'
-	  	  COLOR   60 131 237 
+	  	  COLOR   60 131 237
         ANGLE 60
         SIZE 10
         WIDTH 1
@@ -1202,7 +1211,7 @@ MAP
   END
   ###############################################################################################################
   #### Vector layers to display red hatch select AOIs
-  
+
   LAYER
     CONNECTIONTYPE postgis
     NAME "counties_select"
@@ -1211,10 +1220,10 @@ MAP
     STATUS OFF
     TYPE POLYGON
     TRANSPARENCY alpha
-    CLASS	
+    CLASS
       STYLE
 	  	  SYMBOL 'hatch-lines'
-	  	  COLOR 255 0 0      
+	  	  COLOR 255 0 0
         ANGLE 60
         SIZE 10
         WIDTH 1
@@ -1222,7 +1231,7 @@ MAP
       STYLE
         WIDTH 1
         OUTLINECOLOR 255 0 0
-      END  	         
+      END
     END
   END
   LAYER
@@ -1233,10 +1242,10 @@ MAP
     STATUS OFF
     TYPE POLYGON
     TRANSPARENCY alpha
-    CLASS	
+    CLASS
       STYLE
 	  	  SYMBOL 'hatch-lines'
-	  	  COLOR 255 0 0      
+	  	  COLOR 255 0 0
         ANGLE 60
         SIZE 10
         WIDTH 1
@@ -1244,7 +1253,7 @@ MAP
       STYLE
         WIDTH 1
         OUTLINECOLOR 255 0 0
-      END  	         
+      END
     END
   END
   LAYER
@@ -1255,10 +1264,10 @@ MAP
     STATUS OFF
     TYPE POLYGON
     TRANSPARENCY alpha
-    CLASS	
+    CLASS
       STYLE
 	  	  SYMBOL 'hatch-lines'
-	  	  COLOR 255 0 0      
+	  	  COLOR 255 0 0
         ANGLE 60
         SIZE 10
         WIDTH 1
@@ -1266,7 +1275,7 @@ MAP
       STYLE
         WIDTH 1
         OUTLINECOLOR 255 0 0
-      END  	         
+      END
     END
   END
   LAYER
@@ -1277,10 +1286,10 @@ MAP
     STATUS OFF
     TYPE POLYGON
     TRANSPARENCY alpha
-    CLASS	
+    CLASS
       STYLE
 	  	  SYMBOL 'hatch-lines'
-	  	  COLOR 255 0 0      
+	  	  COLOR 255 0 0
         ANGLE 60
         SIZE 10
         WIDTH 1
@@ -1288,7 +1297,7 @@ MAP
       STYLE
         WIDTH 1
         OUTLINECOLOR 255 0 0
-      END  	         
+      END
     END
   END
   LAYER
@@ -1299,10 +1308,10 @@ MAP
     STATUS OFF
     TYPE POLYGON
     TRANSPARENCY alpha
-    CLASS	
+    CLASS
       STYLE
 	  	  SYMBOL 'hatch-lines'
-	  	  COLOR 255 0 0      
+	  	  COLOR 255 0 0
         ANGLE 60
         SIZE 10
         WIDTH 1
@@ -1310,7 +1319,7 @@ MAP
       STYLE
         WIDTH 1
         OUTLINECOLOR 255 0 0
-      END  	         
+      END
     END
   END
   LAYER
@@ -1321,10 +1330,10 @@ MAP
     STATUS OFF
     TYPE POLYGON
     TRANSPARENCY alpha
-    CLASS	
+    CLASS
       STYLE
 	  	  SYMBOL 'hatch-lines'
-	  	  COLOR 255 0 0      
+	  	  COLOR 255 0 0
         ANGLE 60
         SIZE 10
         WIDTH 1
@@ -1332,9 +1341,9 @@ MAP
       STYLE
         WIDTH 1
         OUTLINECOLOR 255 0 0
-      END  	         
+      END
     END
-  END  
+  END
   LAYER
     CONNECTIONTYPE postgis
     NAME "ecosys_select"
@@ -1343,10 +1352,10 @@ MAP
     STATUS OFF
     TYPE POLYGON
     TRANSPARENCY alpha
-    CLASS	
+    CLASS
       STYLE
 	  	  SYMBOL 'hatch-lines'
-	  	  COLOR 255 0 0      
+	  	  COLOR 255 0 0
         ANGLE 60
         SIZE 10
         WIDTH 1
@@ -1354,12 +1363,12 @@ MAP
       STYLE
         WIDTH 1
         OUTLINECOLOR 255 0 0
-      END  	         
+      END
     END
   END
-  
+
   #########################################################################################################
-  ## AOI map      
+  ## AOI map
   LAYER
     CONNECTIONTYPE postgis
     NAME "aoi"
@@ -1376,7 +1385,7 @@ MAP
     CLASS
       STYLE
         WIDTH 1
-        OUTLINECOLOR 255 0 0 
+        OUTLINECOLOR 255 0 0
       END
     END
   END
