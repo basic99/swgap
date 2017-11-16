@@ -2,7 +2,7 @@
 
 //echo json_encode(array("result"=>"hello"));
 //set mapfile and load mapscript if not already loaded
-$mapfile = "../swgap.map";
+$mapfile = "/var/www/html/swgap/swgap.map";
 require("sw_config.php");
 pg_connect($pg_connect);
 
