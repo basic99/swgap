@@ -219,6 +219,7 @@ class sw_range_class
 		$result = pg_query($swdbcon, $query);
 		$row = pg_fetch_array($result);
 		$aoi_predefined = unserialize($row['aoi_data']);
+		error_log($aoi_predefined);
 
       //check of AOI is predefined if so set is_predefined to true to submit function to zend cache
       $is_predefined = false;
