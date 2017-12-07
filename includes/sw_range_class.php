@@ -4,9 +4,9 @@ $swdbcon = pg_connect("host=localhost dbname=swgap user=postgres");
 
 //function to that does work of construction to assign class values
  function create($aoi_predefined, $aoi_name){
-   
+
       global $swdbcon;
-      
+
 		$key_gapown = explode(":", $aoi_predefined['owner_aoi']);
 		$key_gapman = explode(":", $aoi_predefined['manage_aoi']);
 		$key_county = explode(":", $aoi_predefined['county_aoi']);
@@ -165,10 +165,10 @@ $swdbcon = pg_connect("host=localhost dbname=swgap user=postgres");
 
 			}
 		}
-      
+
       $result = array();
       //assign class variable from preceeding calculations
-      
+
 		$result['range'] = $range;
 		$result['itiscodes'] = $itiscodes;
 		$result['fed_species'] = $fed_species;
@@ -196,7 +196,7 @@ $swdbcon = pg_connect("host=localhost dbname=swgap user=postgres");
 		$result['pif_sonoran'] = $pif_sonoran;
 		$result['pif_s_madre'] = $pif_s_madre;
 		$result['pif_chihuahan'] = $pif_chihuahan;
-      
+
       return $result;
  }
 
@@ -214,7 +214,7 @@ class sw_range_class
 		$result = pg_query($swdbcon, $query);
 		$row = pg_fetch_array($result);
 		$aoi_predefined = unserialize($row['aoi_data']);
-      
+
       //check of AOI is predefined if so set is_predefined to true to submit function to zend cache
       $is_predefined = false;
       if($aoi_predefined){
@@ -222,37 +222,37 @@ class sw_range_class
             if(strlen($v) != 0){$is_predefined = true; break;}
          }
       }
-      
-      //use zend cache to cache results for function create
-		require_once 'Zend/Loader.php';
-      Zend_Loader::loadClass('Zend_Cache');
-      try{
-         $frontendOptions = array(
-            'lifetime' => null, // cache lifetime no expiration 
-            'automatic_serialization' => true
-         );
-         $backendOptions = array(
-             'cache_dir' => '../../temp/' // Directory where to put the cache files
-         );
-         // getting a Zend_Cache_Core object
-         $cache = Zend_Cache::factory('Function',
-                                      'File',
-                                      $frontendOptions,
-                                      $backendOptions);
-      } catch(Exception $e) {
-        echo $e->getMessage();
-      }
-      
-      //call create function
-      if($is_predefined){
-         //submit to zend cache
-         $result = $cache->call('create', array($aoi_predefined, "dummy"));
-      } else {
-         //submit as function not to zend cache for custon AOI
-         $result = create($aoi_predefined, $aoi_name);
-      }
-     
-      
+
+  //     //use zend cache to cache results for function create
+		// require_once 'Zend/Loader.php';
+  //     Zend_Loader::loadClass('Zend_Cache');
+  //     try{
+  //        $frontendOptions = array(
+  //           'lifetime' => null, // cache lifetime no expiration
+  //           'automatic_serialization' => true
+  //        );
+  //        $backendOptions = array(
+  //            'cache_dir' => '../../temp/' // Directory where to put the cache files
+  //        );
+  //        // getting a Zend_Cache_Core object
+  //        $cache = Zend_Cache::factory('Function',
+  //                                     'File',
+  //                                     $frontendOptions,
+  //                                     $backendOptions);
+  //     } catch(Exception $e) {
+  //       echo $e->getMessage();
+  //     }
+
+  //     //call create function
+  //     if($is_predefined){
+  //        //submit to zend cache
+  //        $result = $cache->call('create', array($aoi_predefined, "dummy"));
+  //     } else {
+  //        //submit as function not to zend cache for custon AOI
+  //        $result = create($aoi_predefined, $aoi_name);
+  //     }
+
+
 
 
 		//assign class variable from preceeding calculations
@@ -618,39 +618,39 @@ class sw_range_class
 	function get_species_ss($avian, $mammal, $reptile, $amphibian, $search, $protcats){
 		$report_name = "report".rand(0,999999).".xls";
 		global $swdbcon;
-      
+
       $protcat_text = array(
-            "fed" => "Federally listed",               
-            "stateaz" => "AZ state listed",               
-            "stateco" => "CO state listed",               
-            "statenm" => "NM state listed",               
-            "statenv" => "NV state listed",               
-            "stateut" => "UT state listed",               
-            "nsglobal" => "NS Global priority",               
-            "nsaz" => "NS AZ priority",               
-            "nsco" => "NS CO priority",               
-            "nsnm" => "NS NM priority",               
-            "nsnv" => "NS NV priority",               
-            "nsut" => "NS UT priority",               
-            "sgcnaz" => "AZ SGCN",               
-            "sgcnco" => "CO SGCN",               
-            "sgcnnm" => "NM SGCN",               
-            "sgcnnv" => "NV SGCN",               
-            "sgcnut" => "UT SGCN",               
-            "pifgbas" => "Great Basin PIF",               
-            "pifnrock" => "N. Rockies PIF",               
-            "pifsrock" => "S. Rockies/ Co. Plateau PIF",               
-            "pifsgrass" => "Shortgrass Prairie PIF",               
-            "pifsonora" => "Sonoran and Mohave Deserts PIF",               
-            "pifsmadre" => "Sierra Madre Occidental PIF",               
-            "pifchihua" => "Chihuahuan Desert PIF"             
+            "fed" => "Federally listed",
+            "stateaz" => "AZ state listed",
+            "stateco" => "CO state listed",
+            "statenm" => "NM state listed",
+            "statenv" => "NV state listed",
+            "stateut" => "UT state listed",
+            "nsglobal" => "NS Global priority",
+            "nsaz" => "NS AZ priority",
+            "nsco" => "NS CO priority",
+            "nsnm" => "NS NM priority",
+            "nsnv" => "NS NV priority",
+            "nsut" => "NS UT priority",
+            "sgcnaz" => "AZ SGCN",
+            "sgcnco" => "CO SGCN",
+            "sgcnnm" => "NM SGCN",
+            "sgcnnv" => "NV SGCN",
+            "sgcnut" => "UT SGCN",
+            "pifgbas" => "Great Basin PIF",
+            "pifnrock" => "N. Rockies PIF",
+            "pifsrock" => "S. Rockies/ Co. Plateau PIF",
+            "pifsgrass" => "Shortgrass Prairie PIF",
+            "pifsonora" => "Sonoran and Mohave Deserts PIF",
+            "pifsmadre" => "Sierra Madre Occidental PIF",
+            "pifchihua" => "Chihuahuan Desert PIF"
                            );
-      
-   
+
+
 
 		//open file for writing and write column headers
 		$handle = fopen("/pub/server_temp/{$report_name}", "w+");
-      
+
 		$somecontent = "elcode \t itiscode \t scientific name \t commom name \t";
       foreach(json_decode($protcats) as $protcat) {
          $somecontent .= $protcat_text[$protcat]."\t";
@@ -668,36 +668,36 @@ class sw_range_class
 		}
 		$query = $query." order by strelcode_sort";
 		$itiscodes = $this->itiscodes;
-      
+
       function write_row($handle2, $elcode, $itiscode, $gname, $comnam, $protcats2) {
          global $swdbcon;
             $infospp_cols = array(
-                "fed" => "strusesa",               
-            "stateaz" => "strsprotaz",               
-            "stateco" => "strsprotco",               
-            "statenm" => "strsprotnm",               
-            "statenv" => "strsprotnv",               
+                "fed" => "strusesa",
+            "stateaz" => "strsprotaz",
+            "stateco" => "strsprotco",
+            "statenm" => "strsprotnm",
+            "statenv" => "strsprotnv",
             "stateut" => "strsprotut",
-            "nsglobal" => "strgrank2",  
-            "nsaz" => "strsrankaz2",               
-            "nsco" => "strsrankco2",               
-            "nsnm" => "strsranknm2",               
-            "nsnv" => "strsranknv2",               
-            "nsut" => "strsrankut2",               
-            "sgcnaz" => "strsgcnaz",               
-            "sgcnco" => "strsgcnco",               
-            "sgcnnm" => "strsgcnnm",               
-            "sgcnnv" => "strsgcnnv",               
-            "sgcnut" => "strsgcnut",               
-            "pifgbas" => "strpif09",               
-            "pifnrock" => "strpif10",               
-            "pifsrock" => "strpif16",               
-            "pifsgrass" => "strpif18",               
-            "pifsonora" => "strpif33",               
-            "pifsmadre" => "strpif34",               
-            "pifchihua" => "strpif35"              
+            "nsglobal" => "strgrank2",
+            "nsaz" => "strsrankaz2",
+            "nsco" => "strsrankco2",
+            "nsnm" => "strsranknm2",
+            "nsnv" => "strsranknv2",
+            "nsut" => "strsrankut2",
+            "sgcnaz" => "strsgcnaz",
+            "sgcnco" => "strsgcnco",
+            "sgcnnm" => "strsgcnnm",
+            "sgcnnv" => "strsgcnnv",
+            "sgcnut" => "strsgcnut",
+            "pifgbas" => "strpif09",
+            "pifnrock" => "strpif10",
+            "pifsrock" => "strpif16",
+            "pifsgrass" => "strpif18",
+            "pifsonora" => "strpif33",
+            "pifsmadre" => "strpif34",
+            "pifchihua" => "strpif35"
                             );
-         
+
          $somecontent =  $elcode."\t".$itiscode."\t".$gname."\t".$comnam;
          fwrite($handle2, $somecontent);
          foreach(json_decode($protcats2) as $protct2) {
@@ -709,7 +709,7 @@ class sw_range_class
          }
          fwrite($handle2, "\n");
       }
-      
+
 		$result = pg_query( $swdbcon, $query);
 		while (($row = pg_fetch_array($result))!==FALSE){
 			if ($itiscodes[$row['stritiscode']] == 1){
