@@ -291,6 +291,11 @@ class sw_range_class
 		$this->num_species['pif_s_madre'] = $result['pif_s_madre'];
 		$this->num_species['pif_chihuahan'] = $result['pif_chihuahan'];
 
+		foreach ($this->num_species as $key => $value) {
+			error_log($key);
+			error_log($value);
+		}
+
 
 	}
 	////////////////////////////////////////////////////////////////////////////////
