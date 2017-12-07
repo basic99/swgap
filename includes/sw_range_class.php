@@ -2,6 +2,9 @@
 
 $swdbcon = pg_connect("host=localhost dbname=swgap user=postgres");
 
+ini_set("display_errors", 0);
+ini_set("error_log", "/var/www/html/swgap/logs/php-error.log");
+
 //function to that does work of construction to assign class values
  function create($aoi_predefined, $aoi_name){
 
@@ -209,6 +212,8 @@ class sw_range_class
 	private $query;
 
 	function __construct($aoi_name)	{
+		error_log("sw_range_class");
+
 		global $swdbcon;
 		$query = "select aoi_data from aoi where name = '{$aoi_name}'";
 		$result = pg_query($swdbcon, $query);
