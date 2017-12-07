@@ -216,6 +216,7 @@ class sw_range_class
 
 		global $swdbcon;
 		$query = "select aoi_data from aoi where name = '{$aoi_name}'";
+		error_log($query);
 		$result = pg_query($swdbcon, $query);
 		$row = pg_fetch_array($result);
 		$aoi_predefined = unserialize($row['aoi_data']);
