@@ -7,6 +7,7 @@ pg_connect($pg_connect);
 $mapfile = "/var/www/html/swgap/swgap.map";
 ini_set("display_errors", 0);
 ini_set("error_log", "/var/www/html/swgap/logs/php-error.log");
+error_log("map_ajax");
 
 //process ajax input data
 $extent_raw = $_POST['extent'];

@@ -2,11 +2,15 @@
 //date_default_timezone_set("America/New_York");
 require('sw_config.php');
 pg_connect($pg_connect);
-$mapfile = "../swgap.map";
 require('sw_aoi_class.php');
 require('sw_define_aoi.php');
 
 session_start();
+
+$mapfile = "/var/www/html/swgap/swgap.map";
+ini_set("display_errors", 0);
+ini_set("error_log", "/var/www/html/swgap/logs/php-error.log");
+error_log("map2_ajax");
 
 //click points for navigation
 $click_x = $_POST['clickx'];
@@ -117,8 +121,8 @@ $mapname = "map".rand(0,9999999).".png";
 $maploc = "{$mspath}{$mapname}";
 
 //get calculated maps for single species or richness from aoi_class, but first test to see if we can use previous map
-		
-if (preg_match("/habitat/", $species_layer) && !preg_match("/habitat/", $species_layer_prev)) {    
+
+if (preg_match("/habitat/", $species_layer) && !preg_match("/habitat/", $species_layer_prev)) {
     $map_species = $sw_aoi_class->landcover_map($itiscode);
 }
 if (preg_match("/ownership/", $species_layer) && !preg_match("/ownership/", $species_layer_prev)) {
@@ -134,7 +138,7 @@ if (preg_match("/richness/", $species_layer) && !preg_match("/richness/", $speci
 		$map_species = $sw_aoi_class->richness($richness_species);
 }
 
-//convert itiscode to raster name 
+//convert itiscode to raster name
 if(isset($itiscode) && strlen($itiscode) != 0){
 	$query = "select raster from itis_raster where itiscode = {$itiscode}";
 	//echo $query;
@@ -275,7 +279,7 @@ if(preg_match("/predicted/", $species_layer)){
 	$this_layer->set('data', $grass_raster_perm.$raster);
 	//echo $grass_raster_perm.$raster;
 	$this_layer->set('status', MS_ON);
-	
+
 	$this_layer->set('opacity', $pred_transp);
    //set layers from controls
    if(preg_match("/landcover/", $layer)){
