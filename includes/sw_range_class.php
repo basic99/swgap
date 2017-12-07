@@ -256,7 +256,7 @@ class sw_range_class
   //        $result = $cache->call('create', array($aoi_predefined, "dummy"));
   //     } else {
   //        //submit as function not to zend cache for custon AOI
-  //        $result = create($aoi_predefined, $aoi_name);
+         $result = create($aoi_predefined, $aoi_name);
   //     }
 
 
