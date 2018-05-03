@@ -8,6 +8,13 @@ $swdbcon = pg_connect($pg_connect);
 // various functions that depend on the AOI can then be called
 ///////////////////////////////////////////////////////////////////////////////
 
+date_default_timezone_set('America/New_York');
+
+// ini_set("display_errors", 0);
+ini_set("log_errors", 1);
+ini_set("error_log", "/var/www/html/swgap/logs/php-error.log");
+error_log("aoi_report_ajax");
+
 require("sw_config.php");
 putenv("GISBASE={$GISBASE}");
 putenv("GISRC={$GISRC}");
@@ -160,6 +167,7 @@ r.in.gdal input={$blank} output={$blank_file}a &>/dev/null
 cat /var/www/html/swgap/grass/mask_recl | r.reclass input={$blank_file}a output={$blank_file} &>/dev/null
 GRASS_SCRIPT;
 		//echo $grass_cmd."<br>";ob_flush();flush();
+		error_log($grass_cmd);
 		system($grass_cmd);
 		//system('whoami');
 
