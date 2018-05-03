@@ -7,12 +7,12 @@ $grass_raster = "/data/southwest/webserv/cellhd/";
 //location of GRASS raster data for permanent
 $grass_raster_perm = "/data/southwest/PERMANENT/cellhd/";
 
-$GISBASE = "/usr/local/grass-6.4.0svn";
+$GISBASE = "/usr/local/grass-6.4.6";
 
 // copy .grassrc6 from /home/webserv
 $GISRC = "/var/www/html/swgap/grassrc";
 
-$PATH = "/usr/local/grass-6.4.0svn/bin:/usr/local/grass-6.4.0svn/scripts:/usr/local/bin:/usr/bin:/bin";
+$PATH = "/usr/local/grass-6.4.6/bin:/usr/local/grass-6.4.6/scripts:/usr/local/bin:/usr/bin:/bin";
 
 //set max aoi and large bb area in square meters
 $max_aoi_area = 950000000000;
