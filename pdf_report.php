@@ -5,7 +5,7 @@ pg_connect($pg_connect);
 set_time_limit(300);
 
 //set mapfile and load mapscript if not already loaded
-$mapfile = "swgap.map";
+$mapfile = "/var/www/html/segap/swgap.map";
 
 
 //get form variables
